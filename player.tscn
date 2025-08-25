@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://bca6qi4l4aamw"]
+
+[ext_resource type="PackedScene" uid="uid://b6i6oojvbipau" path="res://assets/3dmodels/stickfigure_base.glb" id="1_4flbx"]
+[ext_resource type="Script" uid="uid://b8sfilqy67qoy" path="res://scripts/player.gd" id="1_onrkg"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_onrkg"]
+radius = 3.23651
+height = 12.2592
+
+[node name="CharacterBody3D" type="CharacterBody3D"]
+script = ExtResource("1_onrkg")
+
+[node name="Pivot" type="Node3D" parent="."]
+transform = Transform3D(0.999903, -0.000170576, -0.0139611, 0, 0.999925, -0.012217, 0.0139622, 0.0122158, 0.999828, -3.65894, -2.1584, -1.53193)
+
+[node name="Sketchfab_Scene" parent="Pivot" instance=ExtResource("1_4flbx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 16.2056, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.00989, 0)
+shape = SubResource("CapsuleShape3D_onrkg")
