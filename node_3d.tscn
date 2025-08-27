@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://bjffumif2gh2u"]
+[gd_scene load_steps=5 format=3 uid="uid://bjffumif2gh2u"]
 
 [ext_resource type="PackedScene" uid="uid://bca6qi4l4aamw" path="res://player.tscn" id="1_a202f"]
 
@@ -6,6 +6,9 @@
 size = Vector3(11.7858, 1.18555, 5.94946)
 
 [sub_resource type="BoxMesh" id="BoxMesh_4xowi"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_a202f"]
+viewport_path = NodePath("SubViewport")
 
 [node name="Node3D(Main)" type="Node3D"]
 
@@ -22,10 +25,17 @@ mesh = SubResource("BoxMesh_4xowi")
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.00174524, 0.999999, 0, -0.999999, 0.00174524, 0, 29.2411, 21.8272)
 
-[node name="CharacterBody3D" parent="." instance=ExtResource("1_a202f")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.195951, 2.82218, -11.0995)
-
 [node name="Marker3D" type="Marker3D" parent="."]
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 11.0497, 9.00792)
+
+[node name="SubViewport" type="SubViewport" parent="."]
+transparent_bg = true
+size = Vector2i(512, 1024)
+
+[node name="Area2D" parent="SubViewport" instance=ExtResource("1_a202f")]
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(-0.985856, 0, -0.167595, 0, 1, 0, 0.167595, 0, -0.985856, -0.517958, 2.97239, -14.47)
+texture = SubResource("ViewportTexture_a202f")

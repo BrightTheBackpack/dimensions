@@ -1,4 +1,4 @@
-extends CharacterBody3D
+extends Area2D
 
 # How fast the player moves in meters per second.
 @export var speed = 14
@@ -16,12 +16,6 @@ func _physics_process(delta):
 		direction.x += 1
 	if Input.is_action_pressed("move_left"):
 		direction.x -= 1
-	if Input.is_action_pressed("move_back"):
-		# Notice how we are working with the vector's x and z axes.
-		# In 3D, the XZ plane is the ground plane.
-		direction.z += 1
-	if Input.is_action_pressed("move_forward"):
-		direction.z -= 1
 	if Input.is_action_pressed("jump"):
 		direction.y +=1
 	if direction != Vector3.ZERO:
