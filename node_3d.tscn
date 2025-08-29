@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://bjffumif2gh2u"]
+[gd_scene load_steps=6 format=3 uid="uid://bjffumif2gh2u"]
 
 [ext_resource type="PackedScene" uid="uid://bca6qi4l4aamw" path="res://player.tscn" id="1_a202f"]
+[ext_resource type="Script" uid="uid://ec7pttehjxh0" path="res://sprite_3d.gd" id="2_noarx"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_4xowi"]
 size = Vector3(11.7858, 1.18555, 5.94946)
@@ -39,3 +40,4 @@ size = Vector2i(512, 1024)
 [node name="Sprite3D" type="Sprite3D" parent="."]
 transform = Transform3D(-0.985856, 0, -0.167595, 0, 1, 0, 0.167595, 0, -0.985856, -0.517958, 2.97239, -14.47)
 texture = SubResource("ViewportTexture_a202f")
+script = ExtResource("2_noarx")

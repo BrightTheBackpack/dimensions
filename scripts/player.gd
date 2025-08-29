@@ -1,34 +1,25 @@
 extends Area2D
 
-# How fast the player moves in meters per second.
-@export var speed = 14
-# The downward acceleration when in the air, in meters per second squared.
-@export var fall_acceleration = 75
-
-var target_velocity = Vector3.ZERO
-
-func _physics_process(delta):
-	# We create a local variable to store the input direction.
-	var direction = Vector3.ZERO
-
-	# We check for each move input and update the direction accordingly.
+@export var speed = 400 # How fast the player will move (pixels/sec).
+var screen_size # Size of the game window.
+func _ready():
+	screen_size = get_viewport_rect().size
+func _process(delta):
+	var velocity = Vector2.ZERO # The player's movement vector.
 	if Input.is_action_pressed("move_right"):
-		direction.x += 1
+		print_debug("move right")
+		velocity.x += 1
 	if Input.is_action_pressed("move_left"):
-		direction.x -= 1
+		velocity.x -= 1
+	#if Input.is_action_pressed("move_down"):
+		#velocity.y += 1
 	if Input.is_action_pressed("jump"):
-		direction.y +=1
-	if direction != Vector3.ZERO:
-		direction = direction.normalized()
-		# Setting the basis property will affect the rotation of the node.
-		$Pivot.basis = Basis.looking_at(direction)
-	target_velocity.x = direction.x * speed
-	target_velocity.z = direction.z * speed
+		velocity.y -= 1
+	position += velocity * delta
 
-	# Vertical Velocity
-	#if not is_on_floor(): # If in the air, fall towards the floor. Literally gravity
-		#target_velocity.y = target_velocity.y - (fall_acceleration * delta)
 
-	# Moving the Character
-	velocity = target_velocity
-	move_and_slide()
+	#if velocity.length() > 0:
+		#velocity = velocity.normalized() * speed
+		#$AnimatedSprite2D.play()
+	#else:
+		#$AnimatedSprite2D.stop()

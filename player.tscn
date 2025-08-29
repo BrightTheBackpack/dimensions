@@ -20,8 +20,6 @@ animations = [{
 position = Vector2(230, 437)
 scale = Vector2(20, 20)
 script = ExtResource("1_onrkg")
-speed = null
-fall_acceleration = null
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(3, 1)
