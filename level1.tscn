@@ -1,0 +1,102 @@
+[gd_scene load_steps=15 format=3 uid="uid://bjffumif2gh2u"]
+
+[ext_resource type="PackedScene" uid="uid://bca6qi4l4aamw" path="res://player.tscn" id="1_ootpb"]
+[ext_resource type="Script" uid="uid://u7ug71x4psto" path="res://character_body_3d.gd" id="2_v38iq"]
+[ext_resource type="Script" uid="uid://ec7pttehjxh0" path="res://sprite_3d.gd" id="3_v8kj3"]
+[ext_resource type="PackedScene" uid="uid://lv4d4vvpodwi" path="res://platform.tscn" id="4_v38iq"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_v8kj3"]
+size = Vector3(23.0734, 19.6891, 0.416992)
+
+[sub_resource type="BoxMesh" id="BoxMesh_crycw"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ootpb"]
+shading_mode = 0
+albedo_color = Color(0.37818, 0.499104, 1, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_4xowi"]
+size = Vector3(585.324, 0.153961, 41.0128)
+
+[sub_resource type="BoxMesh" id="BoxMesh_4xowi"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_a202f"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_v38iq"]
+size = Vector3(0.408447, 1.46967, 0.250732)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ootpb"]
+size = Vector3(5.15888, 0.538208, 3.13074)
+
+[sub_resource type="BoxMesh" id="BoxMesh_v38iq"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_v38iq"]
+shading_mode = 0
+
+[node name="Node3D(Level1)" type="Node3D"]
+
+[node name="StaticBody3D(Wall)" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.95816, -0.411898, -15.7483)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D(Wall)"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.994408, 7.53741, 0.137355)
+shape = SubResource("BoxShape3D_v8kj3")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D(Wall)"]
+transform = Transform3D(100, 0, 0, 0, 20, 0, 0, 0, 0.5, 0, 7.53553, 0)
+mesh = SubResource("BoxMesh_crycw")
+surface_material_override/0 = SubResource("StandardMaterial3D_ootpb")
+
+[node name="StaticBody3D(Floor)" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 10.6022)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D(Floor)"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -150.933, -1.90483, -28.0673)
+shape = SubResource("BoxShape3D_4xowi")
+debug_color = Color(0.964706, 0.117647, 0.380392, 1)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D(Floor)"]
+transform = Transform3D(500, 0, 0, 0, 0.085, 0, 0, 0, 0.25, 3.12758, -2.01629, -25.4676)
+mesh = SubResource("BoxMesh_4xowi")
+
+[node name="SubViewport" type="SubViewport" parent="."]
+transparent_bg = true
+size = Vector2i(512, 1024)
+
+[node name="Area2D" parent="SubViewport" instance=ExtResource("1_ootpb")]
+
+[node name="CharacterBody3D(Player)" type="CharacterBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.122057)
+script = ExtResource("2_v38iq")
+
+[node name="Camera3D" type="Camera3D" parent="CharacterBody3D(Player)"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 11.0497, 9.00792)
+
+[node name="Sprite3D" type="Sprite3D" parent="CharacterBody3D(Player)"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -0.481965, 2.98057, -14.4699)
+texture = SubResource("ViewportTexture_a202f")
+script = ExtResource("3_v8kj3")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D(Player)"]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, -0.180905, 3.47825, -14.498)
+shape = SubResource("BoxShape3D_v38iq")
+debug_color = Color(0.890196, 0, 0.792157, 1)
+
+[node name="StaticBody3D(Object)" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2.1562)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D(Object)"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.95816, -0.411898, -13.5921)
+shape = SubResource("BoxShape3D_ootpb")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D(Object)"]
+transform = Transform3D(5, 0, 0, 0, 1, 0, 0, 0, 0.25, 4.93561, -0.713955, -12.441)
+gi_lightmap_texel_scale = 3.22
+mesh = SubResource("BoxMesh_v38iq")
+surface_material_override/0 = SubResource("StandardMaterial3D_v38iq")
+
+[node name="Platform" parent="." instance=ExtResource("4_v38iq")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 0.5, 16.2964, 0.705139, -14.7289)
+x_size = 2.0
+y_size = 2.0
+z_size = 10.0
