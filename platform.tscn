@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://cnr8hkhv21ssh" path="res://platform_gen.gd" id="1_mi635"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_s8bxr"]
+size = Vector3(1.61902, 1.05322, 0.523926)
 
 [sub_resource type="BoxMesh" id="BoxMesh_mi635"]
 

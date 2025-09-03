@@ -1,6 +1,7 @@
-[gd_scene load_steps=15 format=3 uid="uid://bjffumif2gh2u"]
+[gd_scene load_steps=18 format=3 uid="uid://bjffumif2gh2u"]
 
 [ext_resource type="PackedScene" uid="uid://bca6qi4l4aamw" path="res://player.tscn" id="1_ootpb"]
+[ext_resource type="Script" uid="uid://b3jswshvl3c2t" path="res://camera_3d.gd" id="1_v8kj3"]
 [ext_resource type="Script" uid="uid://u7ug71x4psto" path="res://character_body_3d.gd" id="2_v38iq"]
 [ext_resource type="Script" uid="uid://ec7pttehjxh0" path="res://sprite_3d.gd" id="3_v8kj3"]
 [ext_resource type="PackedScene" uid="uid://lv4d4vvpodwi" path="res://platform.tscn" id="4_v38iq"]
@@ -33,7 +34,16 @@ size = Vector3(5.15888, 0.538208, 3.13074)
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_v38iq"]
 shading_mode = 0
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_crycw"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_i2041"]
+
 [node name="Node3D(Level1)" type="Node3D"]
+
+[node name="Camera3D" type="Camera3D" parent="." node_paths=PackedStringArray("player_node")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.108971, 16.3729, 27.8631)
+script = ExtResource("1_v8kj3")
+player_node = NodePath("../CharacterBody3D(Player)/Sprite3D")
 
 [node name="StaticBody3D(Wall)" type="StaticBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.95816, -0.411898, -15.7483)
@@ -43,7 +53,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.994408, 7.53741, 0.137355)
 shape = SubResource("BoxShape3D_v8kj3")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D(Wall)"]
-transform = Transform3D(100, 0, 0, 0, 20, 0, 0, 0, 0.5, 0, 7.53553, 0)
+transform = Transform3D(100, 0, 0, 0, 40, 0, 0, 0, 0.5, 0, 17.9298, 0)
 mesh = SubResource("BoxMesh_crycw")
 surface_material_override/0 = SubResource("StandardMaterial3D_ootpb")
 
@@ -68,9 +78,7 @@ size = Vector2i(512, 1024)
 [node name="CharacterBody3D(Player)" type="CharacterBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.122057)
 script = ExtResource("2_v38iq")
-
-[node name="Camera3D" type="Camera3D" parent="CharacterBody3D(Player)"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 11.0497, 9.00792)
+JUMP_VELOCITY = 25.0
 
 [node name="Sprite3D" type="Sprite3D" parent="CharacterBody3D(Player)"]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -0.481965, 2.98057, -14.4699)
@@ -96,7 +104,25 @@ mesh = SubResource("BoxMesh_v38iq")
 surface_material_override/0 = SubResource("StandardMaterial3D_v38iq")
 
 [node name="Platform" parent="." instance=ExtResource("4_v38iq")]
-transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 0.5, 16.2964, 0.705139, -14.7289)
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 0.5, 13.5794, 0.733561, -15.07)
 x_size = 2.0
 y_size = 2.0
-z_size = 10.0
+z_size = 0.3
+
+[node name="CollisionShape3D" parent="Platform/Node3D" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.238037)
+
+[node name="MeshInstance3D" parent="Platform/Node3D" index="1"]
+transform = Transform3D(1.62, 0, 0, 0, 1, 0, 0, 0, 1, -0.13, 0, 1.4277)
+
+[node name="StaticBody3D(bg)" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D(bg)"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -27.9349)
+shape = SubResource("BoxShape3D_crycw")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D(bg)"]
+transform = Transform3D(200, 0, 0, 0, 100, 0, 0, 0, 1, 0, 18.8613, -27.9777)
+mesh = SubResource("BoxMesh_i2041")
+
+[editable path="Platform"]

@@ -1,4 +1,3 @@
-tool
 extends Node3D
 @onready var collision_shape: CollisionShape3D = $Node3D/CollisionShape3D
 @onready var mesh_instance: MeshInstance3D = $Node3D/MeshInstance3D
@@ -24,10 +23,11 @@ func _process(delta):
 	# Mesh scaling (assuming you’re using a primitive mesh, like a BoxMesh)
 	print(mesh_instance)
 	var box = BoxMesh.new()
-	box.size = Vector3(x_size, y_size, z_size)
+	box.size = Vector3(x_size, y_size, 0.5)
 	mesh_instance.mesh = box
 	
 
 	# Collision scaling (assuming you’re using a BoxShape3D)
 	if collision_shape.shape is BoxShape3D:
 		collision_shape.shape.extents = Vector3(x_size, y_size, z_size) * 0.5
+		
