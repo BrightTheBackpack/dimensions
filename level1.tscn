@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://lv4d4vvpodwi" path="res://platform.tscn" id="4_v38iq"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_v8kj3"]
-size = Vector3(23.0734, 19.6891, 0.416992)
+size = Vector3(58.5462, 45.5399, 0.416992)
 
 [sub_resource type="BoxMesh" id="BoxMesh_crycw"]
 
@@ -49,7 +49,7 @@ player_node = NodePath("../CharacterBody3D(Player)/Sprite3D")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.95816, -0.411898, -15.7483)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D(Wall)"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.994408, 7.53741, 0.137355)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.70735, 16.2332, 0.137355)
 shape = SubResource("BoxShape3D_v8kj3")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D(Wall)"]
